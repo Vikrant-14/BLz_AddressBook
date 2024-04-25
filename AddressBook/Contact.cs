@@ -59,7 +59,6 @@ namespace AddressBook
             Console.WriteLine("================================");
         }
 
-
         public override string ToString()
         {
             return $"{this.FirstName} {this.LastName}, {this.Email}; {this.Address}, {this.City}, {this.State} , {this.Zip} \n {this.PhoneNumber}";
