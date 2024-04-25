@@ -1,6 +1,7 @@
 ﻿using AddressBook;
 using System;
 using System.ComponentModel.Design;
+using System.Data;
 
 namespace Assignment3
 {
@@ -15,28 +16,69 @@ namespace Assignment3
             Console.WriteLine("================================\n");
         }
 
-        public static int MenuDriven()
+        public List<Contact> GetContacts() { return ContactList; }
+
+        public Contact GetContact(int id) { return ContactList[id]; }
+
+        public void UpdateContact()
         {
-            int choice;
-            try
+            Console.WriteLine("Enter Name : ");
+            string? name = Console.ReadLine();
+
+
+
+
+            if (this.ContactList.Count() != 0)
             {
-                Console.WriteLine("0. Enter Zero to Exit the Application.");
-                Console.WriteLine("1. Enter One to Add Record.");
-                Console.WriteLine("2. Enter Two To Display Record.");
+                var result = from item in this.ContactList
+                             where item.FirstName.Equals(name)
+                             select item;
+
+                if (result.Any())
+                {
+                    foreach (var i in result)
+                    {
+                        Console.WriteLine("Record Found : " + i.FirstName);
+                        i.AcceptContactRecord();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No Record Found!!!");
+                }
             }
-            catch (FormatException e)
+            else
             {
-                Console.WriteLine("Invalid Input : Enter number only");
+                Console.WriteLine("List is Empty!!!");
             }
 
-            choice = Convert.ToInt32(Console.ReadLine());
+        }
+
+        public static int MenuDriven()
+        {
+            int choice = 0;
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("0. Enter Zero to Exit the Application.");
+            Console.WriteLine("1. Enter One to Add Record.");
+            Console.WriteLine("2. Enter Two To Display Record.");
+            Console.WriteLine("3. Update Exisiting Record");
+            Console.WriteLine("--------------------------------------");
+
+            try
+            {
+                choice = Convert.ToInt32(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid Input : Enter number only!!!");
+            }
 
             return choice;
         }
         public static void Main()
         {
             int choice = 0;
-            AddressBookMain addressBook = new AddressBookMain();
+            AddressBookMain addressBook = new();
             addressBook.ContactList = new List<Contact>();
 
             while ((choice = MenuDriven()) != 0)
@@ -47,16 +89,25 @@ namespace Assignment3
                     case 1:
                         Console.WriteLine("Add Record\n--------------");
 
-                        Contact contact = new Contact();
+                        Contact contact = new();
                         contact.AcceptContactRecord();
                         addressBook.ContactList.Add(contact);
                         break;
+
                     case 2:
+                        Console.WriteLine("Display Record\n--------------");
+
                         foreach (var item in addressBook.ContactList)
                         {
                             item.DisplayContactRecord();
                         }
                         break;
+
+                    case 3:
+                        Console.WriteLine("Update Record\n--------------");
+                        addressBook.UpdateContact();
+                        break;
+
                 }
             }
         }

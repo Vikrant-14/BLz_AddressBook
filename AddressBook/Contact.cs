@@ -58,5 +58,11 @@ namespace AddressBook
             Console.WriteLine("Phone Number : " + this.PhoneNumber);
             Console.WriteLine("================================");
         }
+
+
+        public override string ToString()
+        {
+            return $"{this.FirstName} {this.LastName}, {this.Email}; {this.Address}, {this.City}, {this.State} , {this.Zip} \n {this.PhoneNumber}";
+        }
     }
 }
