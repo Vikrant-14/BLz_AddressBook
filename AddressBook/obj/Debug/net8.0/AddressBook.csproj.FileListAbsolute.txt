@@ -1,0 +1,14 @@
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\bin\Debug\net8.0\AddressBook.exe
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\bin\Debug\net8.0\AddressBook.deps.json
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\bin\Debug\net8.0\AddressBook.runtimeconfig.json
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\bin\Debug\net8.0\AddressBook.dll
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\bin\Debug\net8.0\AddressBook.pdb
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\obj\Debug\net8.0\AddressBook.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\obj\Debug\net8.0\AddressBook.AssemblyInfoInputs.cache
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\obj\Debug\net8.0\AddressBook.AssemblyInfo.cs
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\obj\Debug\net8.0\AddressBook.csproj.CoreCompileInputs.cache
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\obj\Debug\net8.0\AddressBook.dll
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\obj\Debug\net8.0\refint\AddressBook.dll
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\obj\Debug\net8.0\AddressBook.pdb
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\obj\Debug\net8.0\AddressBook.genruntimeconfig.cache
+C:\Users\kirti\Vikrant\CDAC\BridgeLabz_Assign\Address Book\AddressBook\obj\Debug\net8.0\ref\AddressBook.dll
