@@ -16,7 +16,9 @@ namespace Assignment3
 
         public static void Main()
         {
-
+            Contact contact1 = new Contact();
+            contact1.AcceptContactRecord();
+            contact1.DisplayContactRecord();
         }
     }
 }
