@@ -31,6 +31,10 @@ namespace AddressBook
             Console.WriteLine("2. Enter Two to Display Address Books.");
             Console.WriteLine("3. Enter Three to Search Person by City or State.");
             Console.WriteLine("4. Enter Four to Count number of people in City or State.");
+            Console.WriteLine("5. Enter Five to Sort By Name.");
+            Console.WriteLine("6. Enter Six to Sort By City.");
+            Console.WriteLine("7. Enter Seven to Sort By State.");
+            Console.WriteLine("8. Enter Eight to Sort By Zip Code.");
             Console.WriteLine("--------------------------------------");
 
             try
@@ -120,11 +124,44 @@ namespace AddressBook
             Console.WriteLine($"Number of persons in {cityOrState} = {count}");
         }
 
-        public void SortedByName()
+        public void SortByName()
         {
             foreach (var item in this.AddressBookList)
             {
                 foreach (var i in item.Value.ContactList.Values.OrderBy(x => x.FirstName))
+                {
+                    i.DisplayContactRecord();
+                }
+            }
+        }
+
+        public void SortByCity()
+        {
+            foreach (var item in this.AddressBookList)
+            {
+                foreach (var i in item.Value.ContactList.Values.OrderBy(x => x.City))
+                {
+                    i.DisplayContactRecord();
+                }
+            }
+        }
+
+        public void SortByState()
+        {
+            foreach (var item in this.AddressBookList)
+            {
+                foreach (var i in item.Value.ContactList.Values.OrderBy(x => x.State))
+                {
+                    i.DisplayContactRecord();
+                }
+            }
+        }
+
+        public void SortByZipCode()
+        {
+            foreach (var item in this.AddressBookList)
+            {
+                foreach (var i in item.Value.ContactList.Values.OrderBy(x => x.Zip))
                 {
                     i.DisplayContactRecord();
                 }
@@ -263,7 +300,40 @@ namespace AddressBook
                         }
                         else
                         {
-                            p1.SortedByName();
+                            p1.SortByName();
+                        }
+                        break;
+
+                    case 6:
+                        if (p1.AddressBookList.Count == 0)
+                        {
+                            Console.WriteLine("Address Book is Empty.");
+                        }
+                        else
+                        {
+                            p1.SortByCity();
+                        }
+                        break;
+
+                    case 7:
+                        if (p1.AddressBookList.Count == 0)
+                        {
+                            Console.WriteLine("Address Book is Empty.");
+                        }
+                        else
+                        {
+                            p1.SortByState();
+                        }
+                        break; 
+                    
+                    case 8:
+                        if (p1.AddressBookList.Count == 0)
+                        {
+                            Console.WriteLine("Address Book is Empty.");
+                        }
+                        else
+                        {
+                            p1.SortByZipCode();
                         }
                         break;
                 }
