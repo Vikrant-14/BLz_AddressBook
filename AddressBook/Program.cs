@@ -11,6 +11,10 @@ namespace AddressBook
     internal class Program
     {
         Dictionary<string, AddressBookMain>? AddressBookList;
+
+        List<Contact> contacts;
+        Dictionary<string, List<Contact>>? CityList; 
+
         static Program()
         {
             Console.WriteLine("================================");
@@ -25,7 +29,8 @@ namespace AddressBook
             Console.WriteLine("0. Enter Zero to Exit the Application.");
             Console.WriteLine("1. Enter One to Add New Address Book.");
             Console.WriteLine("2. Enter Two to Display Address Books.");
-            Console.WriteLine("3. Enter Three to Search by City or State.");
+            Console.WriteLine("3. Enter Three to Search Person by City or State.");
+            Console.WriteLine("4. Enter Four to Count number of people in City or State.");
             Console.WriteLine("--------------------------------------");
 
             try
@@ -85,18 +90,34 @@ namespace AddressBook
 
         public void SearchByCityOrState(string cityOrState)
         {
-
             foreach (var item in this.AddressBookList)
             {
                 foreach (var i in item.Value.ContactList)
                 {
-                    if ((i.Value.City == cityOrState) || (i.Value.City == cityOrState))
+                    if ((i.Value.City == cityOrState) || (i.Value.State == cityOrState))
                     {
                         Console.WriteLine($"First Name : {i.Value.FirstName} :: Last Name : {i.Value.LastName}");
                     }
                 }
             }
+        }
 
+        public void CountPeopleByCityOrState(string cityOrState)
+        {
+            int count = 0;
+
+            foreach (var item in this.AddressBookList)
+            {
+                foreach (var i in item.Value.ContactList)
+                {
+                    if ((i.Value.City == cityOrState) || (i.Value.State == cityOrState))
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            Console.WriteLine($"Number of persons in {cityOrState} = {count}");
         }
 
         public static void Main()
@@ -108,6 +129,10 @@ namespace AddressBook
 
 
             p1.AddressBookList = new Dictionary<string, AddressBookMain>();
+
+
+            p1.contacts = new List<Contact>();
+            p1.CityList = new Dictionary<string, List<Contact>>();
 
             while ((choice1 = UserInput()) != 0)
             {
@@ -145,6 +170,7 @@ namespace AddressBook
                                         try
                                         {
                                             addressBook.ContactList.Add(contact.FirstName, contact);
+                                            p1.contacts.Add(contact);//new uc9
                                         }
                                         catch (ArgumentException)
                                         {
@@ -152,7 +178,9 @@ namespace AddressBook
                                         }
                                     }
                                     if (!p1.AddressBookList.Keys.Contains(addressBook.AddressBookName))
-                                        p1.AddressBookList.Add(addressBook.AddressBookName, addressBook);//exception : record is already added on same key
+                                    {
+                                         p1.AddressBookList.Add(addressBook.AddressBookName, addressBook);//exception : record is already added on same key
+                                    }
 
                                     break;
 
@@ -201,6 +229,20 @@ namespace AddressBook
                             p1.SearchByCityOrState(cityOrState);
                         }
 
+                        break;
+
+                    case 4:
+                        if (p1.AddressBookList.Count == 0)
+                        {
+                            Console.WriteLine("Address Book is Empty.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter City or State : ");
+                            string? cityOrState = Console.ReadLine();
+
+                            p1.CountPeopleByCityOrState(cityOrState);
+                        }
                         break;
                 }
             }

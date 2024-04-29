@@ -61,7 +61,7 @@ namespace AddressBook
 
         public override string ToString()
         {
-            return $"{this.FirstName} {this.LastName}, {this.Email}; {this.Address}, {this.City}, {this.State} , {this.Zip} \n {this.PhoneNumber}";
+            return $"{this.FirstName} {this.LastName},\n {this.Email};\n {this.Address}, \n {this.City}, {this.State},\n {this.Zip} \n {this.PhoneNumber}";
         }
     }
 }
