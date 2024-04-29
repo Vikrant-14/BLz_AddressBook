@@ -120,6 +120,17 @@ namespace AddressBook
             Console.WriteLine($"Number of persons in {cityOrState} = {count}");
         }
 
+        public void SortedByName()
+        {
+            foreach (var item in this.AddressBookList)
+            {
+                foreach (var i in item.Value.ContactList.Values.OrderBy(x => x.FirstName))
+                {
+                    i.DisplayContactRecord();
+                }
+            }
+        }
+        
         public static void Main()
         {
             Program p1 = new();
@@ -242,6 +253,17 @@ namespace AddressBook
                             string? cityOrState = Console.ReadLine();
 
                             p1.CountPeopleByCityOrState(cityOrState);
+                        }
+                        break;
+
+                    case 5:
+                        if (p1.AddressBookList.Count == 0)
+                        {
+                            Console.WriteLine("Address Book is Empty.");
+                        }
+                        else
+                        {
+                            p1.SortedByName();
                         }
                         break;
                 }
