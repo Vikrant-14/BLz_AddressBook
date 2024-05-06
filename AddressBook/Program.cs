@@ -93,6 +93,37 @@ namespace AddressBook
             }
         }
 
+        public void SaveStateInFile()
+        {
+            try
+            {
+                string filePath = "C:\\Users\\kirti\\Vikrant\\CDAC\\BridgeLabz_Assign\\Address Book\\ContactBook.txt";
+
+                if (!File.Exists(filePath))
+                {
+                    File.Create(filePath);
+                    Console.WriteLine("ContactBook File has been created Successfully");
+                }
+
+                foreach (var item in this.AddressBookList)
+                {
+                    Console.WriteLine("Address Book Name : " + item.Key);
+                    foreach (var i in item.Value.ContactList)
+                    {
+                        string contactDetail = i.Value.ToString();
+                        File.AppendAllText(filePath, contactDetail);
+
+                        Console.WriteLine("ContactBook Updated Successfully");
+       
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         public void SearchByCityOrState(string cityOrState)
         {
             foreach (var item in this.AddressBookList)
@@ -356,6 +387,8 @@ namespace AddressBook
                     //    break;
                 }
             }
+
+            p1.SaveStateInFile();
         }
     }
 }
