@@ -35,6 +35,7 @@ namespace AddressBook
             Console.WriteLine("6. Enter Six to Sort By City.");
             Console.WriteLine("7. Enter Seven to Sort By State.");
             Console.WriteLine("8. Enter Eight to Sort By Zip Code.");
+            //Console.WriteLine("9. Enter Nine to Sort By Option.");
             Console.WriteLine("--------------------------------------");
 
             try
@@ -152,7 +153,7 @@ namespace AddressBook
             {
                 foreach (var i in item.Value.ContactList.Values.OrderBy(x => x.State))
                 {
-                    i.DisplayContactRecord();
+                    i.DisplayContactRecord(); 
                 }
             }
         }
@@ -336,6 +337,23 @@ namespace AddressBook
                             p1.SortByZipCode();
                         }
                         break;
+
+                    //case 9:
+                    //    if (p1.AddressBookList.Count == 0)
+                    //    {
+                    //        Console.WriteLine("Address Book is Empty.");
+                    //    }
+                    //    else
+                    //    {
+                    //        foreach (var item in p1.AddressBookList)
+                    //        {
+                    //            foreach (var i in item.Value.ContactList)
+                    //            {
+                    //                i.Contact.Sort();
+                    //            }
+                    //        }
+                    //    }
+                    //    break;
                 }
             }
         }

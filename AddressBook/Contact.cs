@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace AddressBook
 {
-    internal class Contact
+    internal class Contact : IComparable<Contact>
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
@@ -43,6 +44,37 @@ namespace AddressBook
 
             Console.Write("Enter your Phone Number : ");
             this.PhoneNumber = Convert.ToInt64(Console.ReadLine());
+        }
+
+        public int CompareTo(Contact? other)
+        {
+            Console.WriteLine("1.Enter One to sort By City. ");
+            Console.WriteLine("2.Enter Two to sort By State. ");
+            Console.WriteLine("3.Enter Three to sort By ZipCode. ");
+            Console.WriteLine("Enter option to sort by : ");
+            int option = Convert.ToInt32(Console.ReadLine());
+
+            if(option == 1) 
+            {
+                return this.City.CompareTo(other.City);
+            }
+            else if(option == 2) 
+            {
+                return this.State.CompareTo(other.State);
+            }
+            else if(option == 3)
+            {
+                if (this.Zip > other.Zip)
+                {
+                    return 1;
+                }
+                else if (this.Zip == other.Zip)
+                {
+                    return 0;
+                }
+            }
+
+            return 0;
         }
 
         public void DisplayContactRecord()
