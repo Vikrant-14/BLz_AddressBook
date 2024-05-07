@@ -1,6 +1,9 @@
 ﻿using Assignment3;
+using CsvHelper;
+using CsvHelper.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -93,6 +96,40 @@ namespace AddressBook
             }
         }
 
+        public void SaveStateInCsv()
+        {
+            try
+            {
+                string filePath = "C:\\Users\\kirti\\Vikrant\\CDAC\\BridgeLabz_Assign\\Address Book\\data.csv";
+
+                bool append = true;
+
+                using (var writer = new StreamWriter(filePath,append))
+                using(var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    csv.Context.RegisterClassMap<ContactMap>();
+
+                    foreach (var item in this.AddressBookList)
+                    {
+                        foreach (var i in item.Value.ContactList)
+                        {
+                            csv.WriteRecord(i.Value);
+                            csv.NextRecord();
+
+                        }
+                    }
+                };
+
+                Console.WriteLine("File Updated Successfully.");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            
+        }
+
         public void SearchByCityOrState(string cityOrState)
         {
             foreach (var item in this.AddressBookList)
@@ -101,7 +138,7 @@ namespace AddressBook
                 {
                     if ((i.Value.City == cityOrState) || (i.Value.State == cityOrState))
                     {
-                        Console.WriteLine($"First Name : {i.Value.FirstName} :: Last Name : {i.Value.LastName}");
+                        Console.WriteLine($"Full Name : {i.Value.FirstName} {i.Value.LastName}");
                     }
                 }
             }
@@ -356,6 +393,8 @@ namespace AddressBook
                     //    break;
                 }
             }
+
+            p1.SaveStateInCsv();
         }
     }
 }

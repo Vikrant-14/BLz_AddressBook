@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CsvHelper.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -94,6 +95,21 @@ namespace AddressBook
         public override string ToString()
         {
             return $"{this.FirstName} {this.LastName},\n {this.Email};\n {this.Address}, \n {this.City}, {this.State},\n {this.Zip} \n {this.PhoneNumber}";
+        }
+    }
+
+    internal class ContactMap : ClassMap<Contact>
+    {
+        public ContactMap()
+        {
+            Map(m => m.FirstName).Name("First Name");
+            Map(m => m.LastName).Name("Last Name");
+            Map(m => m.Email).Name("Email");
+            Map(m => m.Address).Name("Address");
+            Map(m => m.City).Name("City");
+            Map(m => m.State).Name("State");
+            Map(m => m.Zip).Name("Zip Code");
+            Map(m => m.PhoneNumber).Name("Phone Number");
         }
     }
 }
