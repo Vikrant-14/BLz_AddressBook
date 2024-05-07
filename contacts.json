@@ -1,0 +1,48 @@
+[
+  {
+    "AddressBookName": "Address Book 1",
+    "ContactList": {
+      "Prasad ": {
+        "FirstName": "Prasad ",
+        "LastName": "Ahire",
+        "Email": "prasad.ahire04@gmail.com'",
+        "Address": "Nidhan Clover",
+        "City": "Mumbai",
+        "State": "MH",
+        "Zip": 421300,
+        "PhoneNumber": 8457693521
+      }
+    }
+  }
+][
+  {
+    "AddressBookName": "Address Book 1",
+    "ContactList": {
+      "Mayur": {
+        "FirstName": "Mayur",
+        "LastName": "Patil",
+        "Email": "patil.mayur@gmail.com",
+        "Address": " 987, Krishna Apt.,",
+        "City": "Nashik",
+        "State": "MH",
+        "Zip": 654235,
+        "PhoneNumber": 7569843219
+      }
+    }
+  },
+  {
+    "AddressBookName": "Address Book 2",
+    "ContactList": {
+      "Tejas": {
+        "FirstName": "Tejas",
+        "LastName": "",
+        "Email": "tt@gmail.com",
+        "Address": "54, Sudham Banglow",
+        "City": "Solapur",
+        "State": "MH",
+        "Zip": 598746,
+        "PhoneNumber": 8844557962
+      }
+    }
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "FirstName": "Vikrant",
+    "LastName": "Gawale",
+    "Email": "vikrant.g0112@gmail.com",
+    "Address": "104, Vasudev Apt.,",
+    "City": "Kalyan",
+    "State": "MH",
+    "Zip": 421306,
+    "PhoneNumber": 9987938985
+  },
+  {
+    "FirstName": "Prasad",
+    "LastName": "Ahire",
+    "Email": "prasad.Ahire@gmail.com",
+    "Address": "Nidhan Clover",
+    "City": "Mumbai",
+    "State": "MH",
+    "Zip": 400354,
+    "PhoneNumber": 7896587415
+  }
+]

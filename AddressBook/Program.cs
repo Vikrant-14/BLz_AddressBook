@@ -1,4 +1,5 @@
 ﻿using Assignment3;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,8 @@ namespace AddressBook
         Dictionary<string, AddressBookMain>? AddressBookList;
 
         List<Contact> contacts;
-        Dictionary<string, List<Contact>>? CityList; 
-
+        Dictionary<string, List<Contact>>? CityList;
+        
         static Program()
         {
             Console.WriteLine("================================");
@@ -35,7 +36,6 @@ namespace AddressBook
             Console.WriteLine("6. Enter Six to Sort By City.");
             Console.WriteLine("7. Enter Seven to Sort By State.");
             Console.WriteLine("8. Enter Eight to Sort By Zip Code.");
-            //Console.WriteLine("9. Enter Nine to Sort By Option.");
             Console.WriteLine("--------------------------------------");
 
             try
@@ -90,6 +90,74 @@ namespace AddressBook
                         i.Value.DisplayContactRecord();
                     }
                 }
+            }
+        }
+
+        public void SerializationUsingJSON()
+        {
+            try
+            {
+                string filePath = "C:\\Users\\kirti\\Vikrant\\CDAC\\BridgeLabz_Assign\\Address Book\\contactList.json";
+
+                // Serialize each contact to JSON and write to file
+                using (StreamWriter writer = new StreamWriter(filePath, false))
+                {
+                    List<Contact> allContacts = new List<Contact>();
+
+                    foreach (var item in this.AddressBookList)
+                    {
+                        foreach (var contact in item.Value.ContactList)
+                        {
+                            allContacts.Add(contact.Value);
+                        }
+                    }
+
+                    string json = JsonConvert.SerializeObject(allContacts, Formatting.Indented);
+                    writer.WriteLine(json);
+                }
+
+                Console.WriteLine("Contacts saved to JSON file successfully.");
+
+                // Deserialize the entire JSON file content into a list of contacts
+                List<Contact> contactList = JsonConvert.DeserializeObject<List<Contact>>(File.ReadAllText(filePath));
+
+                // Display contacts read from JSON
+                foreach (var contact in contactList)
+                {
+                    Console.WriteLine(contact.ToString());
+                }
+            }
+            catch (JsonSerializationException ex)
+            {
+                Console.WriteLine("Error occurred: " + ex.Message);
+            }
+        }
+
+
+        public void DeSerializationUsingJSon()
+        {
+            try
+            {
+                string filePath = "C:\\Users\\kirti\\Vikrant\\CDAC\\BridgeLabz_Assign\\Address Book\\contacts.json";
+
+                // Read the JSON from file and deserialize into dictionary
+                string jsonFromFile = File.ReadAllText(filePath);
+
+                var ContactFromFile = JsonConvert.DeserializeObject<Dictionary<string, AddressBookMain>>(jsonFromFile);
+
+                Console.WriteLine("Contacts read from JSON file:");
+                foreach (var kvp in ContactFromFile.Values)
+                {
+                    foreach (var i in kvp.ContactList)
+                    {
+                        Console.WriteLine(i.Value.FirstName);
+                    }
+                }
+
+            }
+            catch (JsonSerializationException ex)
+            {
+                Console.WriteLine("Error occurred: " + ex.Message);
             }
         }
 
@@ -336,26 +404,11 @@ namespace AddressBook
                         {
                             p1.SortByZipCode();
                         }
-                        break;
-
-                    //case 9:
-                    //    if (p1.AddressBookList.Count == 0)
-                    //    {
-                    //        Console.WriteLine("Address Book is Empty.");
-                    //    }
-                    //    else
-                    //    {
-                    //        foreach (var item in p1.AddressBookList)
-                    //        {
-                    //            foreach (var i in item.Value.ContactList)
-                    //            {
-                    //                i.Contact.Sort();
-                    //            }
-                    //        }
-                    //    }
-                    //    break;
+                        break; 
                 }
             }
+            p1.SerializationUsingJSON();
+            //p1.DeSerializationUsingJSon();
         }
     }
 }
