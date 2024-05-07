@@ -96,19 +96,151 @@ namespace AddressBook
             }
         }
 
+
+        public void CheckCSV()
+        {
+            string filePath = "C:\\Users\\kirti\\Vikrant\\CDAC\\BridgeLabz_Assign\\Address Book\\data2.csv";
+
+            // Check if the file exists
+            if (File.Exists(filePath))
+            {
+                // Read the CSV file
+                using (var reader = new StreamReader(filePath))
+                using (var csv = new CsvReader(reader, new CsvHelper.Configuration.CsvConfiguration(System.Globalization.CultureInfo.InvariantCulture)
+                {
+                    HasHeaderRecord = false, // Indicates that the file has a header row
+                }))
+                {
+                    // Skip the header row
+                    csv.Read();
+
+                    // Process data rows
+                    while (csv.Read())
+                    {
+                        IEnumerable<Contact> fields = csv.GetRecords<Contact>();
+
+
+                        foreach (var field in fields)
+                        {
+                            field.DisplayContactRecord(); // Trim whitespace
+                        }
+                        Console.WriteLine(fields.Count());
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("File does not exist.");
+            }
+        }
+
+        //Reading State from CSV
+        public void ReadStateFromCsv()
+        {
+           
+
+                string filePath = "C:\\Users\\kirti\\Vikrant\\CDAC\\BridgeLabz_Assign\\Address Book\\data2.csv";
+
+                using(var reader = new StreamReader(filePath))
+                {
+                    reader.BaseStream.Seek(0, SeekOrigin.Begin);
+                    var config = new CsvConfiguration(CultureInfo.InvariantCulture);
+                    using (var csv =new CsvReader(reader,config))
+                    {
+                        
+                        csv.Read();
+                        csv.ReadHeader();
+
+                        //while (csv.Read())
+                        //{
+                        //    var con = csv.GetRecord<Contact>();
+                        //    Console.WriteLine(con.ToString());
+                        //}
+
+                        config.HasHeaderRecord = true; // Assuming CSV has a header row
+
+                        // Read a single record from the CSV file and map it to a Contact object
+                        Contact contact = csv.GetRecord<Contact>();
+
+                        // Do something with the contact object
+                        if (contact != null)
+                        {
+                            Console.WriteLine($"First Name: {contact.FirstName}, Last Name: {contact.LastName}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No more records.");
+                        }
+
+                        //csv.Context.RegisterClassMap<ContactMap>();
+
+                        ////var contacts = csv.GetRecord<Contact>();
+                        //IEnumerable<Contact> records = csv.GetRecords<Contact>();
+
+                        //foreach (var i in records)
+                        //{
+                        //    Console.WriteLine(i.ToString());
+                        //}
+                    }
+                }
+
+                //var config = new CsvConfiguration(CultureInfo.InvariantCulture);
+
+                //using (var reader = new StreamReader(filePath))
+                //using (var csv = new CsvReader(reader, config))
+                //{
+                //    // Configure CsvReader to use the header names from the CSV file
+                //    config.HasHeaderRecord = true;
+
+                //    // Read the records
+                //    IEnumerable<Contact> records = csv.GetRecords<Contact>();
+
+                //    // Process the records
+                //    foreach (var record in records)
+                //    {
+                //        // Do something with each record
+                //        //Console.WriteLine($"First Name: {record.FirstName}, Last Name: {record.LastName}");
+                //        record.DisplayContactRecord();
+                //    }
+                //}
+
+                //using (var reader = new CsvReader(File.OpenText(filePath), CultureInfo.InvariantCulture))
+                //{
+                //    reader.Configuration.HasHeaderRecord = false;
+
+                //    reader.Context.RegisterClassMap<ContactMap>();
+
+                //    IEnumerable<Contact> records = reader.GetRecords<Contact>();
+                //    foreach (var i in records)
+                //    {
+                //        i.ToString();
+                //    }
+                //}
+
+           
+        }
+
+        //Writing data into CSV file
         public void SaveStateInCsv()
         {
             try
             {
-                string filePath = "C:\\Users\\kirti\\Vikrant\\CDAC\\BridgeLabz_Assign\\Address Book\\data.csv";
+                string filePath = "C:\\Users\\kirti\\Vikrant\\CDAC\\BridgeLabz_Assign\\Address Book\\data2.csv";
 
                 bool append = true;
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture);
+                //config.HasHeaderRecord;
 
                 using (var writer = new StreamWriter(filePath,append))
-                using(var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                using(var csv = new CsvWriter(writer, config))
                 {
                     csv.Context.RegisterClassMap<ContactMap>();
-
+                    if (!config.HasHeaderRecord)
+                    {
+                        csv.WriteHeader<Contact>();
+                        csv.NextRecord();
+                    }
+                   
                     foreach (var item in this.AddressBookList)
                     {
                         foreach (var i in item.Value.ContactList)
@@ -395,6 +527,8 @@ namespace AddressBook
             }
 
             p1.SaveStateInCsv();
+            //p1.ReadStateFromCsv();
+            p1.CheckCSV();
         }
     }
 }

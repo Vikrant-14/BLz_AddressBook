@@ -19,7 +19,10 @@ namespace AddressBook
         public int Zip { get; set; }
         public long PhoneNumber { get; set; }
 
+        public Contact()
+        {
 
+        }
         public void AcceptContactRecord()
         {
             Console.Write("Enter your First Name : ");
@@ -102,14 +105,14 @@ namespace AddressBook
     {
         public ContactMap()
         {
-            Map(m => m.FirstName).Name("First Name");
-            Map(m => m.LastName).Name("Last Name");
-            Map(m => m.Email).Name("Email");
-            Map(m => m.Address).Name("Address");
-            Map(m => m.City).Name("City");
-            Map(m => m.State).Name("State");
-            Map(m => m.Zip).Name("Zip Code");
-            Map(m => m.PhoneNumber).Name("Phone Number");
+            Map(m => m.FirstName).Index(0).Name("FirstName");
+            Map(m => m.LastName).Index(1).Name("LastName");
+            Map(m => m.Email).Index(2).Name("Email");
+            Map(m => m.Address).Index(3).Name("Address");
+            Map(m => m.City).Index(4).Name("City");
+            Map(m => m.State).Index(5).Name("State");
+            Map(m => m.Zip).Index(6).Name("Zip");
+            Map(m => m.PhoneNumber).Index(7).Name("PhoneNumber");
         }
     }
 }
